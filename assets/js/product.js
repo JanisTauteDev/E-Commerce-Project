@@ -126,7 +126,7 @@
         root.querySelector('[data-qty]').textContent = qty;
       });
       root.querySelector('[data-qty-inc]').addEventListener('click', () => {
-        qty = Math.min(variant.stock, qty + 1);
+        qty = Math.min(Math.max(1, variant.stock), qty + 1);
         root.querySelector('[data-qty]').textContent = qty;
       });
       root.querySelector('[data-add]').addEventListener('click', () => {
