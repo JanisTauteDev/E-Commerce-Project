@@ -102,7 +102,7 @@
       /* tier selector */
       const tierBox = root.querySelector('[data-tiers]');
       tierBox.innerHTML = product.variants.map(v => `
-        <div class="tier-option" role="radio" tabindex="0"
+        <div class="tier-option" role="radio" tabindex="${v.tier === currentTier ? '0' : '-1'}"
              aria-checked="${v.tier === currentTier}" data-tier="${v.tier}">
           <div class="tier-option__head">
             <span class="tier tier--${v.tier}">${v.tier}</span>
@@ -112,12 +112,38 @@
         </div>
       `).join('');
 
+      const selectTier = (tier) => {
+        currentTier = tier;
+        qty = 1;
+        render();
+      };
+
       tierBox.addEventListener('click', (e) => {
         const opt = e.target.closest('[data-tier]');
         if (!opt) return;
-        currentTier = opt.dataset.tier;
-        qty = 1;
-        render();
+        selectTier(opt.dataset.tier);
+      });
+
+      tierBox.addEventListener('keydown', (e) => {
+        const opt = e.target.closest('[data-tier]');
+        if (!opt) return;
+
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectTier(opt.dataset.tier);
+          return;
+        }
+
+        if (!['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(e.key)) return;
+        e.preventDefault();
+
+        const options = Array.from(tierBox.querySelectorAll('[data-tier]'));
+        const idx = options.indexOf(opt);
+        if (idx === -1) return;
+
+        const step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+        const next = options[(idx + step + options.length) % options.length];
+        selectTier(next.dataset.tier);
       });
 
       /* qty + add */
