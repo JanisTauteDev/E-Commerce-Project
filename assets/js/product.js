@@ -18,14 +18,6 @@
         ? params.get("tier")
         : "standard";
     let qty = 1;
-    let galleryIdx = 0;
-
-    const VIEW_COUNT =
-      (NORDHEM.Illustrations && NORDHEM.Illustrations.VIEW_COUNT) || 3;
-    const viewLabel = (i) =>
-      NORDHEM.Illustrations
-        ? NORDHEM.Illustrations.viewLabel(i)
-        : `View ${i + 1}`;
 
     function render() {
       const variant = NORDHEM.findVariant(product, currentTier);
@@ -41,7 +33,6 @@
         <div class="product-detail">
           <section aria-label="Product images">
             <div class="gallery__main" data-gallery-main></div>
-            <div class="gallery__thumbs" data-gallery-thumbs></div>
           </section>
 
           <section>
@@ -87,26 +78,9 @@
         </section>
       `;
 
-      /* image gallery */
+      /* product image */
       const main = root.querySelector("[data-gallery-main]");
-      main.appendChild(
-        UI.tile(product, viewLabel(galleryIdx), { view: galleryIdx }),
-      );
-
-      const thumbs = root.querySelector("[data-gallery-thumbs]");
-      for (let i = 0; i < VIEW_COUNT; i++) {
-        const btn = document.createElement("button");
-        btn.className = "gallery__thumb";
-        btn.type = "button";
-        btn.setAttribute("aria-current", String(i === galleryIdx));
-        btn.setAttribute("aria-label", viewLabel(i));
-        btn.appendChild(UI.tile(product, "", { view: i }));
-        btn.addEventListener("click", () => {
-          galleryIdx = i;
-          render();
-        });
-        thumbs.appendChild(btn);
-      }
+      main.appendChild(UI.tile(product));
 
       /* tier choice */
       const tierBox = root.querySelector("[data-tiers]");

@@ -137,3 +137,31 @@ NORDHEM.findCategory = (id) => NORDHEM.CATEGORIES.find(c => c.id === Number(id))
 NORDHEM.minPrice = (p) => Math.min(...p.variants.map(v => v.price));
 NORDHEM.maxPrice = (p) => Math.max(...p.variants.map(v => v.price));
 NORDHEM.formatPrice = (n) => '€' + n.toFixed(2);
+
+/* Assign local product photos */
+(function () {
+  const BASE = 'assets/images/products/';
+  const MAP = {
+    1:  'fjord-sofa.jpg',
+    2:  'lagom-coffee-table.jpg',
+    3:  'bjork-bookshelf.jpg',
+    4:  'drom-bed-frame.jpg',
+    5:  'natt-nightstand.jpg',
+    6:  'linne-wardrobe.jpg',
+    7:  'koka-cookware-set.jpg',
+    8:  'bord-dining-table.jpg',
+    9:  'glas-tumbler-set.jpg',
+    10: 'skriva-desk.jpg',
+    11: 'sitta-office-chair.jpg',
+    12: 'ordna-organiser.jpg',
+    13: 'bada-towel-set.jpg',
+    14: 'spegel-mirror.jpg',
+    15: 'tval-soap-dispenser.jpg',
+    16: 'mane-floor-lamp.jpg',
+    17: 'stjarna-pendant.jpg',
+    18: 'ljus-table-lamp.jpg',
+    19: 'mys-armchair.jpg',
+    20: 'kniv-knife-block.jpg',
+  };
+  NORDHEM.PRODUCTS.forEach(p => { p.photo = BASE + MAP[p.id]; });
+})();
