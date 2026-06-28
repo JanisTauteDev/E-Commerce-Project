@@ -1,7 +1,5 @@
--- =====================================================================
 -- NORDHEM e-commerce - SQL schema (SQLite / MySQL / PostgreSQL compatible)
 -- Price differentiation is expressed via product_variants (one row per tier).
--- =====================================================================
 
 PRAGMA foreign_keys = ON;
 

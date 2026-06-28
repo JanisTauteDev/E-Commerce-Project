@@ -1,11 +1,10 @@
-/* NORDHEM - clean line-art SVG illustrations per product, IKEA assembly-manual style.
-   Reliable (no network), always on-topic, supports multiple gallery views per product. */
+/* Simple line-art SVG drawings used as product images */
 (function () {
-  const STROKE = '#1f2630';
-  const FILL   = 'rgba(255,255,255,0.78)';
-  const SOFT   = 'rgba(0,0,0,0.08)';
+  const STROKE = "#1f2630";
+  const FILL = "rgba(255,255,255,0.78)";
+  const SOFT = "rgba(0,0,0,0.08)";
 
-  /* Each shape function returns the inner <g> markup of a 200x200 viewBox. */
+  /* One drawing per product, keyed by product id */
   const SHAPES = {
     /* 1 - Fjord Sofa */
     1: () => `
@@ -185,26 +184,28 @@
       <rect x="124" y="33" width="12" height="10" fill="${STROKE}"/>`,
   };
 
-  const VIEW_LABELS = ['Front view', 'Side angle', 'Detail'];
+  const VIEW_LABELS = ["Front view", "Side angle", "Detail"];
 
-  /* Build SVG markup for a product + view (0/1/2). */
+  /* Build the SVG for a product and the chosen view (0, 1 or 2) */
   function svgFor(product, view = 0) {
     const draw = SHAPES[product.id] || SHAPES[1];
-    let viewBox = '0 0 200 200';
-    let transform = '';
+    let viewBox = "0 0 200 200";
+    let transform = "";
     if (view === 1) {
-      // mirror + slight scale = believable other-side angle
-      transform = 'translate(200,0) scale(-1,1) rotate(-4 100 100)';
+      /* flip horizontally for a side angle */
+      transform = "translate(200,0) scale(-1,1) rotate(-4 100 100)";
     } else if (view === 2) {
-      // crop in for a detail view
-      viewBox = '50 50 100 100';
+      /* zoom in for a detail view */
+      viewBox = "50 50 100 100";
     }
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <g transform="${transform}">${draw()}</g>
     </svg>`;
   }
 
-  function viewLabel(i) { return VIEW_LABELS[i] || `View ${i + 1}`; }
+  function viewLabel(i) {
+    return VIEW_LABELS[i] || `View ${i + 1}`;
+  }
 
   window.NORDHEM = window.NORDHEM || {};
   NORDHEM.Illustrations = { svgFor, viewLabel, VIEW_COUNT: 3 };

@@ -1,5 +1,4 @@
-/* NORDHEM - product catalogue (mirrors the SQL schema 1:1).
-   In production replace with `fetch('/api/products').then(r => r.json())`. */
+/* Product, category and tier data for the store */
 window.NORDHEM = window.NORDHEM || {};
 
 NORDHEM.CATEGORIES = [
@@ -17,7 +16,7 @@ NORDHEM.TIERS = [
   { id: 'premium',  label: 'Premium',  blurb: 'Top-tier materials & finish' },
 ];
 
-/* Tile colour pairs reused as placeholder media */
+/* Color pairs used for the placeholder product images */
 const _tiles = [
   ['#e8edf3','#cfd8e3'], ['#f5e9d7','#e2c89f'], ['#dee9df','#b9d2bd'],
   ['#e6dfee','#c4b2db'], ['#fde7e7','#f1bdbd'], ['#dde7ee','#b8cad9'],
@@ -131,7 +130,7 @@ NORDHEM.PRODUCTS = [
   ]),
 ];
 
-/* ---------- helpers exposed on the namespace ---------- */
+/* Helper functions for finding products and formatting prices */
 NORDHEM.findProduct = (id) => NORDHEM.PRODUCTS.find(p => p.id === Number(id));
 NORDHEM.findVariant = (product, tier) => product.variants.find(v => v.tier === tier);
 NORDHEM.findCategory = (id) => NORDHEM.CATEGORIES.find(c => c.id === Number(id));

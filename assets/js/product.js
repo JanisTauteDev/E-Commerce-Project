@@ -1,27 +1,31 @@
-/* NORDHEM - product detail page: gallery, tier selector, add-to-cart, related items. */
+/* Product detail page: gallery, tier selector, add to cart and related items */
 (function () {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const { PRODUCTS, UI, Store, formatPrice, findCategory } = NORDHEM;
 
     const params = new URLSearchParams(location.search);
-    const product = NORDHEM.findProduct(params.get('id'));
-    const root = document.querySelector('[data-product-root]');
+    const product = NORDHEM.findProduct(params.get("id"));
+    const root = document.querySelector("[data-product-root]");
 
     if (!product) {
       root.innerHTML = `<div class="empty-state">Product not found. <a href="shop.html">Back to shop</a></div>`;
       return;
     }
 
-    let currentTier = params.get('tier') && product.variants.some(v => v.tier === params.get('tier'))
-      ? params.get('tier')
-      : 'standard';
+    let currentTier =
+      params.get("tier") &&
+      product.variants.some((v) => v.tier === params.get("tier"))
+        ? params.get("tier")
+        : "standard";
     let qty = 1;
     let galleryIdx = 0;
 
-    const VIEW_COUNT = (NORDHEM.Illustrations && NORDHEM.Illustrations.VIEW_COUNT) || 3;
-    const viewLabel = (i) => NORDHEM.Illustrations
-      ? NORDHEM.Illustrations.viewLabel(i)
-      : `View ${i + 1}`;
+    const VIEW_COUNT =
+      (NORDHEM.Illustrations && NORDHEM.Illustrations.VIEW_COUNT) || 3;
+    const viewLabel = (i) =>
+      NORDHEM.Illustrations
+        ? NORDHEM.Illustrations.viewLabel(i)
+        : `View ${i + 1}`;
 
     function render() {
       const variant = NORDHEM.findVariant(product, currentTier);
@@ -52,8 +56,8 @@
             <div style="font-size:1.5rem;font-weight:700;margin:var(--s-3) 0">
               ${formatPrice(variant.price)}
             </div>
-            <p style="color:${variant.stock > 0 ? 'var(--c-success)' : 'var(--c-danger)'};font-weight:600">
-              ${variant.stock > 0 ? `In stock (${variant.stock})` : 'Out of stock'}
+            <p style="color:${variant.stock > 0 ? "var(--c-success)" : "var(--c-danger)"};font-weight:600">
+              ${variant.stock > 0 ? `In stock (${variant.stock})` : "Out of stock"}
             </p>
 
             <div class="flex" style="gap:var(--s-3);margin:var(--s-4) 0">
@@ -62,16 +66,16 @@
                 <span data-qty>${qty}</span>
                 <button type="button" data-qty-inc aria-label="Increase">+</button>
               </div>
-              <button class="btn" data-add ${variant.stock === 0 ? 'disabled' : ''}>Add to cart</button>
+              <button class="btn" data-add ${variant.stock === 0 ? "disabled" : ""}>Add to cart</button>
             </div>
 
             <div class="specs">
               <h3>Specifications</h3>
               <dl>
                 <dt>SKU</dt><dd>${variant.sku}</dd>
-                <dt>Material</dt><dd>${product.material || '-'}</dd>
-                <dt>Dimensions</dt><dd>${product.dimensions || '-'}</dd>
-                <dt>Features</dt><dd>${variant.features.join(', ')}</dd>
+                <dt>Material</dt><dd>${product.material || "-"}</dd>
+                <dt>Dimensions</dt><dd>${product.dimensions || "-"}</dd>
+                <dt>Features</dt><dd>${variant.features.join(", ")}</dd>
               </dl>
             </div>
           </section>
@@ -83,60 +87,71 @@
         </section>
       `;
 
-      /* gallery */
-      const main = root.querySelector('[data-gallery-main]');
-      main.appendChild(UI.tile(product, viewLabel(galleryIdx), { view: galleryIdx }));
+      /* image gallery */
+      const main = root.querySelector("[data-gallery-main]");
+      main.appendChild(
+        UI.tile(product, viewLabel(galleryIdx), { view: galleryIdx }),
+      );
 
-      const thumbs = root.querySelector('[data-gallery-thumbs]');
+      const thumbs = root.querySelector("[data-gallery-thumbs]");
       for (let i = 0; i < VIEW_COUNT; i++) {
-        const btn = document.createElement('button');
-        btn.className = 'gallery__thumb';
-        btn.type = 'button';
-        btn.setAttribute('aria-current', String(i === galleryIdx));
-        btn.setAttribute('aria-label', viewLabel(i));
-        btn.appendChild(UI.tile(product, '', { view: i }));
-        btn.addEventListener('click', () => { galleryIdx = i; render(); });
+        const btn = document.createElement("button");
+        btn.className = "gallery__thumb";
+        btn.type = "button";
+        btn.setAttribute("aria-current", String(i === galleryIdx));
+        btn.setAttribute("aria-label", viewLabel(i));
+        btn.appendChild(UI.tile(product, "", { view: i }));
+        btn.addEventListener("click", () => {
+          galleryIdx = i;
+          render();
+        });
         thumbs.appendChild(btn);
       }
 
-      /* tier selector */
-      const tierBox = root.querySelector('[data-tiers]');
-      tierBox.innerHTML = product.variants.map(v => `
+      /* tier choice */
+      const tierBox = root.querySelector("[data-tiers]");
+      tierBox.innerHTML = product.variants
+        .map(
+          (v) => `
         <div class="tier-option" role="radio" tabindex="0"
              aria-checked="${v.tier === currentTier}" data-tier="${v.tier}">
           <div class="tier-option__head">
             <span class="tier tier--${v.tier}">${v.tier}</span>
             <span class="tier-option__price">${formatPrice(v.price)}</span>
           </div>
-          <ul>${v.features.map(f => `<li>${f}</li>`).join('')}</ul>
+          <ul>${v.features.map((f) => `<li>${f}</li>`).join("")}</ul>
         </div>
-      `).join('');
+      `,
+        )
+        .join("");
 
-      tierBox.addEventListener('click', (e) => {
-        const opt = e.target.closest('[data-tier]');
+      tierBox.addEventListener("click", (e) => {
+        const opt = e.target.closest("[data-tier]");
         if (!opt) return;
         currentTier = opt.dataset.tier;
         qty = 1;
         render();
       });
 
-      /* qty + add */
-      root.querySelector('[data-qty-dec]').addEventListener('click', () => {
+      /* quantity buttons and add to cart */
+      root.querySelector("[data-qty-dec]").addEventListener("click", () => {
         qty = Math.max(1, qty - 1);
-        root.querySelector('[data-qty]').textContent = qty;
+        root.querySelector("[data-qty]").textContent = qty;
       });
-      root.querySelector('[data-qty-inc]').addEventListener('click', () => {
+      root.querySelector("[data-qty-inc]").addEventListener("click", () => {
         qty = Math.min(variant.stock, qty + 1);
-        root.querySelector('[data-qty]').textContent = qty;
+        root.querySelector("[data-qty]").textContent = qty;
       });
-      root.querySelector('[data-add]').addEventListener('click', () => {
+      root.querySelector("[data-add]").addEventListener("click", () => {
         Store.add(product.id, currentTier, qty);
         UI.toast(`${product.name} (${currentTier}) × ${qty} added to cart`);
       });
 
-      /* related */
-      const related = PRODUCTS.filter(p => p.categoryId === product.categoryId && p.id !== product.id).slice(0, 4);
-      UI.renderProductGrid(root.querySelector('[data-related]'), related);
+      /* related products from the same category */
+      const related = PRODUCTS.filter(
+        (p) => p.categoryId === product.categoryId && p.id !== product.id,
+      ).slice(0, 4);
+      UI.renderProductGrid(root.querySelector("[data-related]"), related);
     }
 
     render();

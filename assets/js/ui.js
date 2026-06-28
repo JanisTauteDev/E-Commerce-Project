@@ -1,24 +1,24 @@
-/* NORDHEM - shared UI: header, cart badge, mobile nav, search, toast, product card render. */
+/* Shared UI: header, cart badge, mobile nav, search, toast and product cards */
 (function () {
-  const { Store, PRODUCTS, CATEGORIES, formatPrice, minPrice, maxPrice, findCategory } = NORDHEM;
+  const { Store, formatPrice, minPrice, maxPrice, findCategory } = NORDHEM;
 
-  /* ---------- header ---------- */
+  /* Set up the header: menu, search and cart badge */
   function initHeader() {
-    const burger = document.querySelector('[data-hamburger]');
-    const nav = document.querySelector('[data-mobile-nav]');
+    const burger = document.querySelector("[data-hamburger]");
+    const nav = document.querySelector("[data-mobile-nav]");
     if (burger && nav) {
-      burger.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
-        burger.setAttribute('aria-expanded', String(open));
+      burger.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        burger.setAttribute("aria-expanded", String(open));
       });
     }
 
-    const search = document.querySelector('[data-header-search]');
+    const search = document.querySelector("[data-header-search]");
     if (search) {
-      search.addEventListener('submit', (e) => {
+      search.addEventListener("submit", (e) => {
         e.preventDefault();
-        const q = search.querySelector('input').value.trim();
-        const url = 'shop.html' + (q ? `?q=${encodeURIComponent(q)}` : '');
+        const q = search.querySelector("input").value.trim();
+        const url = "shop.html" + (q ? `?q=${encodeURIComponent(q)}` : "");
         window.location.href = url;
       });
     }
@@ -28,61 +28,61 @@
   }
 
   function updateCartBadge() {
-    const el = document.querySelector('[data-cart-badge]');
+    const el = document.querySelector("[data-cart-badge]");
     if (!el) return;
     const n = Store.count();
     el.textContent = n;
-    el.style.display = n > 0 ? '' : 'none';
+    el.style.display = n > 0 ? "" : "none";
   }
 
-  /* ---------- toast ---------- */
+  /* Small popup message shown briefly */
   let toastTimer;
   function toast(msg) {
-    let el = document.querySelector('.toast');
+    let el = document.querySelector(".toast");
     if (!el) {
-      el = document.createElement('div');
-      el.className = 'toast';
+      el = document.createElement("div");
+      el.className = "toast";
       document.body.appendChild(el);
     }
     el.textContent = msg;
-    el.classList.add('show');
+    el.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
   }
 
-  /* ---------- placeholder media ---------- */
+  /* Build a placeholder image for a product */
   function tile(product, label, opts = {}) {
     const [a, b] = product.tileColors;
-    const div = document.createElement('div');
-    div.className = 'tile';
-    div.style.setProperty('--tile-a', a);
-    div.style.setProperty('--tile-b', b);
+    const div = document.createElement("div");
+    div.className = "tile";
+    div.style.setProperty("--tile-a", a);
+    div.style.setProperty("--tile-b", b);
 
     const view = Number.isInteger(opts.view) ? opts.view : 0;
     div.innerHTML = NORDHEM.Illustrations.svgFor(product, view);
     return div;
   }
 
-  /* ---------- product card ---------- */
+  /* Build a product card for the grids */
   function productCard(product) {
     const cat = findCategory(product.categoryId);
     const lo = minPrice(product);
     const hi = maxPrice(product);
 
-    const card = document.createElement('article');
-    card.className = 'product-card';
+    const card = document.createElement("article");
+    card.className = "product-card";
 
-    const media = document.createElement('a');
+    const media = document.createElement("a");
     media.href = `product.html?id=${product.id}`;
-    media.className = 'product-card__media';
-    media.setAttribute('aria-label', product.name);
+    media.className = "product-card__media";
+    media.setAttribute("aria-label", product.name);
     media.appendChild(tile(product));
     card.appendChild(media);
 
-    const body = document.createElement('div');
-    body.className = 'product-card__body';
+    const body = document.createElement("div");
+    body.className = "product-card__body";
     body.innerHTML = `
-      <span class="product-card__cat">${cat?.name ?? ''}</span>
+      <span class="product-card__cat">${cat?.name ?? ""}</span>
       <a class="product-card__name" href="product.html?id=${product.id}">${product.name}</a>
       <span class="rating">${product.rating.toFixed(1)} <span style="color:var(--c-muted)">(${product.reviewCount})</span></span>
       <div class="product-card__tiers">
@@ -99,8 +99,8 @@
       </div>`;
     card.appendChild(body);
 
-    body.querySelector('[data-quick-add]').addEventListener('click', () => {
-      Store.add(product.id, 'standard', 1);
+    body.querySelector("[data-quick-add]").addEventListener("click", () => {
+      Store.add(product.id, "standard", 1);
       toast(`${product.name} (Standard) added to cart`);
     });
 
@@ -108,28 +108,35 @@
   }
 
   function renderProductGrid(container, products) {
-    container.innerHTML = '';
+    container.innerHTML = "";
     if (!products.length) {
-      const empty = document.createElement('div');
-      empty.className = 'empty-state';
-      empty.textContent = 'No products match your filters.';
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "No products match your filters.";
       container.appendChild(empty);
       return;
     }
     const frag = document.createDocumentFragment();
-    products.forEach(p => frag.appendChild(productCard(p)));
+    products.forEach((p) => frag.appendChild(productCard(p)));
     container.appendChild(frag);
   }
 
-  /* ---------- footer auto-year ---------- */
+  /* Show the current year in the footer */
   function initFooter() {
-    const y = document.querySelector('[data-year]');
+    const y = document.querySelector("[data-year]");
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
-  NORDHEM.UI = { initHeader, initFooter, tile, productCard, renderProductGrid, toast };
+  NORDHEM.UI = {
+    initHeader,
+    initFooter,
+    tile,
+    productCard,
+    renderProductGrid,
+    toast,
+  };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     initHeader();
     initFooter();
   });

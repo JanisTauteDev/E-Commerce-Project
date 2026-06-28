@@ -1,137 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NORDHEM - Home & Room Essentials</title>
-  <meta name="description" content="IKEA-inspired home & room essentials with transparent Basic, Standard and Premium tiers.">
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="brand" href="index.html">NORD<span class="brand__dot">·</span>HEM</a>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html" class="active">Home</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NORDHEM - Home & Room Essentials</title>
+    <meta
+      name="description"
+      content="IKEA-inspired home & room essentials with transparent Basic, Standard and Premium tiers."
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html"
+          >NORD<span class="brand__dot">·</span>HEM</a
+        >
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html" class="active">Home</a>
+          <a href="shop.html">Shop</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <form class="header-search" data-header-search role="search">
+          <input
+            type="search"
+            placeholder="Search products…"
+            aria-label="Search products"
+          />
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="cart.html" aria-label="Cart">
+            🛒<span class="cart-badge" data-cart-badge>0</span>
+          </a>
+          <button
+            class="icon-btn hamburger"
+            data-hamburger
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Menu"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+      <nav
+        id="mobile-nav"
+        class="mobile-nav"
+        data-mobile-nav
+        aria-label="Mobile"
+      >
+        <a href="index.html">Home</a>
         <a href="shop.html">Shop</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
-      <form class="header-search" data-header-search role="search">
-        <input type="search" placeholder="Search products…" aria-label="Search products">
-      </form>
-      <div class="header-actions">
-        <a class="icon-btn" href="cart.html" aria-label="Cart">
-          🛒<span class="cart-badge" data-cart-badge>0</span>
-        </a>
-        <button class="icon-btn hamburger" data-hamburger aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">☰</button>
-      </div>
-    </div>
-    <nav id="mobile-nav" class="mobile-nav" data-mobile-nav aria-label="Mobile">
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__lead">
-          <span class="eyebrow">Three tiers · one promise</span>
-          <h1>Furniture that fits your budget - and your taste.</h1>
-          <p>Every NORDHEM product comes in three transparent tiers: <strong>Basic</strong>, <strong>Standard</strong>, and <strong>Premium</strong>. Pick the one that fits your life - no fine print, no upsell.</p>
-          <div class="flex" style="margin-top:var(--s-4);gap:var(--s-3)">
-            <a class="btn" href="shop.html">Shop all</a>
-            <a class="btn btn--ghost" href="#how-tiers-work">How tiers work</a>
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__lead">
+            <span class="eyebrow">Three tiers · one promise</span>
+            <h1>Furniture that fits your budget - and your taste.</h1>
+            <p>
+              Every NORDHEM product comes in three transparent tiers:
+              <strong>Basic</strong>, <strong>Standard</strong>, and
+              <strong>Premium</strong>. Pick the one that fits your life - no
+              fine print, no upsell.
+            </p>
+            <div class="flex" style="margin-top: var(--s-4); gap: var(--s-3)">
+              <a class="btn" href="shop.html">Shop all</a>
+              <a class="btn btn--ghost" href="#how-tiers-work"
+                >How tiers work</a
+              >
+            </div>
+          </div>
+          <div class="tier-showcase" data-hero-tiers id="tiers"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="flex between" style="margin-bottom: var(--s-4)">
+            <h2 style="margin: 0">Featured products</h2>
+            <a href="shop.html">View all →</a>
+          </div>
+          <div class="product-grid" data-featured></div>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="how-tiers-work">
+        <div class="container">
+          <h2>How our tiers work</h2>
+          <p style="color: var(--c-muted); max-width: 60ch">
+            Every NORDHEM product is offered in three transparent tiers. Same
+            design, same dimensions - different materials, hardware and
+            warranty. Pick the one that fits your home and budget.
+          </p>
+          <div
+            class="grid"
+            style="
+              grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+              margin-top: var(--s-5);
+            "
+          >
+            <article class="tier-card">
+              <span class="tier tier--basic">Basic</span>
+              <h3 style="margin: 0">Entry essentials</h3>
+              <p style="color: var(--c-muted); margin: 0">
+                Quality materials at the lowest price. Perfect for first
+                apartments, student housing and short-term setups.
+              </p>
+              <ul
+                style="
+                  margin: 0;
+                  padding-left: 1.1rem;
+                  color: var(--c-muted);
+                  font-size: 0.9rem;
+                "
+              >
+                <li>Practical finishes</li>
+                <li>2-year warranty</li>
+                <li>Lowest price point</li>
+              </ul>
+            </article>
+            <article class="tier-card">
+              <span class="tier tier--standard">Standard</span>
+              <h3 style="margin: 0">Best value</h3>
+              <p style="color: var(--c-muted); margin: 0">
+                The recommended choice. Better materials, longer warranty and
+                refined finish - without the premium price.
+              </p>
+              <ul
+                style="
+                  margin: 0;
+                  padding-left: 1.1rem;
+                  color: var(--c-muted);
+                  font-size: 0.9rem;
+                "
+              >
+                <li>Upgraded fabrics &amp; veneers</li>
+                <li>5-year warranty</li>
+                <li>Most popular tier</li>
+              </ul>
+            </article>
+            <article class="tier-card">
+              <span class="tier tier--premium">Premium</span>
+              <h3 style="margin: 0">Built to last</h3>
+              <p style="color: var(--c-muted); margin: 0">
+                Top-tier materials, advanced features and our longest warranty.
+                Built for the homes you intend to keep.
+              </p>
+              <ul
+                style="
+                  margin: 0;
+                  padding-left: 1.1rem;
+                  color: var(--c-muted);
+                  font-size: 0.9rem;
+                "
+              >
+                <li>Solid woods &amp; natural fibres</li>
+                <li>10-year warranty</li>
+                <li>Premium hardware</li>
+              </ul>
+            </article>
+          </div>
+          <div style="margin-top: var(--s-5)">
+            <a class="btn" href="shop.html">Browse the catalogue</a>
           </div>
         </div>
-        <div class="tier-showcase" data-hero-tiers id="tiers"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="flex between" style="margin-bottom:var(--s-4)">
-          <h2 style="margin:0">Featured products</h2>
-          <a href="shop.html">View all →</a>
+      <section class="section section--alt">
+        <div class="container">
+          <h2>Shop by room</h2>
+          <div
+            class="grid"
+            data-categories
+            style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))"
+          ></div>
         </div>
-        <div class="product-grid" data-featured></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section section--alt" id="how-tiers-work">
-      <div class="container">
-        <h2>How our tiers work</h2>
-        <p style="color:var(--c-muted);max-width:60ch">Every NORDHEM product is offered in three transparent tiers. Same design, same dimensions - different materials, hardware and warranty. Pick the one that fits your home and budget.</p>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:var(--s-5)">
-          <article class="tier-card">
-            <span class="tier tier--basic">Basic</span>
-            <h3 style="margin:0">Entry essentials</h3>
-            <p style="color:var(--c-muted);margin:0">Quality materials at the lowest price. Perfect for first apartments, student housing and short-term setups.</p>
-            <ul style="margin:0;padding-left:1.1rem;color:var(--c-muted);font-size:.9rem">
-              <li>Practical finishes</li><li>2-year warranty</li><li>Lowest price point</li>
-            </ul>
-          </article>
-          <article class="tier-card">
-            <span class="tier tier--standard">Standard</span>
-            <h3 style="margin:0">Best value</h3>
-            <p style="color:var(--c-muted);margin:0">The recommended choice. Better materials, longer warranty and refined finish - without the premium price.</p>
-            <ul style="margin:0;padding-left:1.1rem;color:var(--c-muted);font-size:.9rem">
-              <li>Upgraded fabrics &amp; veneers</li><li>5-year warranty</li><li>Most popular tier</li>
-            </ul>
-          </article>
-          <article class="tier-card">
-            <span class="tier tier--premium">Premium</span>
-            <h3 style="margin:0">Built to last</h3>
-            <p style="color:var(--c-muted);margin:0">Top-tier materials, advanced features and our longest warranty. Built for the homes you intend to keep.</p>
-            <ul style="margin:0;padding-left:1.1rem;color:var(--c-muted);font-size:.9rem">
-              <li>Solid woods &amp; natural fibres</li><li>10-year warranty</li><li>Premium hardware</li>
-            </ul>
-          </article>
+      <section class="section">
+        <div class="container">
+          <h2>Why NORDHEM</h2>
+          <div
+            class="grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))"
+          >
+            <div>
+              <h3>Transparent tiers</h3>
+              <p style="color: var(--c-muted)">
+                See the Basic, Standard and Premium price for every product,
+                side by side.
+              </p>
+            </div>
+            <div>
+              <h3>Built to last</h3>
+              <p style="color: var(--c-muted)">
+                Up to 10-year warranty on Premium pieces, 5 years on Standard.
+              </p>
+            </div>
+            <div>
+              <h3>Free shipping over €200</h3>
+              <p style="color: var(--c-muted)">
+                Flat €9.99 below that. No hidden fees at checkout.
+              </p>
+            </div>
+            <div>
+              <h3>30-day returns</h3>
+              <p style="color: var(--c-muted)">
+                If it doesn't fit your space, send it back - we'll refund you.
+              </p>
+            </div>
+          </div>
         </div>
-        <div style="margin-top:var(--s-5)"><a class="btn" href="shop.html">Browse the catalogue</a></div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section class="section section--alt">
-      <div class="container">
-        <h2>Shop by room</h2>
-        <div class="grid" data-categories style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Why NORDHEM</h2>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-          <div><h3>Transparent tiers</h3><p style="color:var(--c-muted)">See the Basic, Standard and Premium price for every product, side by side.</p></div>
-          <div><h3>Built to last</h3><p style="color:var(--c-muted)">Up to 10-year warranty on Premium pieces, 5 years on Standard.</p></div>
-          <div><h3>Free shipping over €200</h3><p style="color:var(--c-muted)">Flat €9.99 below that. No hidden fees at checkout.</p></div>
-          <div><h3>30-day returns</h3><p style="color:var(--c-muted)">If it doesn't fit your space, send it back - we'll refund you.</p></div>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom: var(--s-3)">
+            NORD<span class="brand__dot">·</span>HEM
+          </div>
+          <p style="color: #94a3b8">
+            Home & room essentials with transparent price tiers.
+          </p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <p><a href="shop.html">All products</a></p>
+          <p><a href="shop.html?category=1">Living Room</a></p>
+          <p><a href="shop.html?category=2">Bedroom</a></p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <p><a href="about.html">About</a></p>
+          <p><a href="about.html#faq">FAQ</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <p>support@nordhem.example</p>
+          <p>+372 600 0000</p>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="brand" style="margin-bottom:var(--s-3)">NORD<span class="brand__dot">·</span>HEM</div>
-        <p style="color:#94a3b8">Home & room essentials with transparent price tiers.</p>
+      <div class="container footer-bottom">
+        © <span data-year></span> NORDHEM. Educational project.
       </div>
-      <div><h4>Shop</h4><p><a href="shop.html">All products</a></p><p><a href="shop.html?category=1">Living Room</a></p><p><a href="shop.html?category=2">Bedroom</a></p></div>
-      <div><h4>Company</h4><p><a href="about.html">About</a></p><p><a href="about.html#faq">FAQ</a></p><p><a href="contact.html">Contact</a></p></div>
-      <div><h4>Support</h4><p>support@nordhem.example</p><p>+372 600 0000</p></div>
-    </div>
-    <div class="container footer-bottom">© <span data-year></span> NORDHEM. Educational project.</div>
-  </footer>
+    </footer>
 
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/store.js"></script>
-  <script src="assets/js/illustrations.js"></script>
-  <script src="assets/js/ui.js"></script>
-  <script src="assets/js/home.js"></script>
-</body>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/store.js"></script>
+    <script src="assets/js/illustrations.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/home.js"></script>
+  </body>
 </html>
