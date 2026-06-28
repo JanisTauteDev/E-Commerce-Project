@@ -92,9 +92,7 @@ CREATE TABLE cart_items (
   UNIQUE (user_id, variant_id)
 );
 
--- =====================================================================
 -- Seed data
--- =====================================================================
 
 INSERT INTO categories (id, slug, name, description) VALUES
  (1,'living-room','Living Room','Sofas, tables, shelving and lighting'),
