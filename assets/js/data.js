@@ -1,4 +1,4 @@
-/* Product data — sourced at runtime from database/schema.sql (no hardcoded products) */
+/* Product data - sourced at runtime from database/schema.sql (no hardcoded products) */
 window.NORDHEM = window.NORDHEM || {};
 
 /* Tier labels (presentation only) */

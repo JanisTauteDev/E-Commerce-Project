@@ -117,7 +117,7 @@
     body.querySelector("[data-quick-add]").addEventListener("click", () => {
       const res = Store.add(product.id, "standard", 1);
       if (res.capped) {
-        toast(`Only ${res.stock} in stock for ${product.name} (Standard) — maximum reached.`);
+        toast(`Only ${res.stock} in stock for ${product.name} (Standard) - maximum reached.`);
       } else {
         toast(`${product.name} (Standard) added to cart`);
       }

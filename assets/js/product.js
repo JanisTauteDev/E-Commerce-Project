@@ -120,7 +120,7 @@
         const res = Store.add(product.id, currentTier, qty);
         if (res.capped) {
           UI.toast(
-            `Only ${res.stock} in stock for ${product.name} (${currentTier}) — your cart now holds the maximum.`,
+            `Only ${res.stock} in stock for ${product.name} (${currentTier}) - your cart now holds the maximum.`,
           );
         } else {
           UI.toast(`${product.name} (${currentTier}) × ${res.added} added to cart`);
