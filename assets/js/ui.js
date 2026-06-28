@@ -50,17 +50,22 @@
     toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
   }
 
-  /* Build a product image tile */
-  function tile(product) {
+  /* Build a product image tile.
+   * eager=true  → load immediately (above-the-fold cards)
+   * eager=false → native lazy-load (default for off-screen cards)
+   */
+  function tile(product, eager) {
     const div = document.createElement('div');
     div.className = 'tile';
 
     const img = document.createElement('img');
-    img.src = product.photo || '';
-    img.alt = product.name;
+    img.src      = product.photo || '';
+    img.alt      = product.name;
     img.className = 'tile__img';
-    img.loading = 'lazy';
-    img.decoding = 'async';
+    img.loading  = eager ? 'eager' : 'lazy';
+    img.decoding = eager ? 'sync'  : 'async';
+    if (eager) img.setAttribute('fetchpriority', 'high');
+
     /* Fallback to gradient if photo fails to load */
     img.onerror = () => {
       const [a, b] = product.tileColors || ['#e8edf3', '#cfd8e3'];
@@ -71,8 +76,10 @@
     return div;
   }
 
-  /* Build a product card for the grids */
-  function productCard(product) {
+  /* Build a product card for the grids.
+   * eager=true loads the image immediately (no lazy loading).
+   */
+  function productCard(product, eager) {
     const cat = findCategory(product.categoryId);
     const lo = minPrice(product);
     const hi = maxPrice(product);
@@ -84,7 +91,7 @@
     media.href = `product.html?id=${product.id}`;
     media.className = "product-card__media";
     media.setAttribute("aria-label", product.name);
-    media.appendChild(tile(product));
+    media.appendChild(tile(product, eager));
     card.appendChild(media);
 
     const body = document.createElement("div");
@@ -125,7 +132,7 @@
       return;
     }
     const frag = document.createDocumentFragment();
-    products.forEach((p) => frag.appendChild(productCard(p)));
+    products.forEach((p, i) => frag.appendChild(productCard(p, i < 4)));
     container.appendChild(frag);
   }
 
