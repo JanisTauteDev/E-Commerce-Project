@@ -50,16 +50,24 @@
     toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
   }
 
-  /* Build a placeholder image for a product */
-  function tile(product, label, opts = {}) {
-    const [a, b] = product.tileColors;
-    const div = document.createElement("div");
-    div.className = "tile";
-    div.style.setProperty("--tile-a", a);
-    div.style.setProperty("--tile-b", b);
+  /* Build a product image tile */
+  function tile(product) {
+    const div = document.createElement('div');
+    div.className = 'tile';
 
-    const view = Number.isInteger(opts.view) ? opts.view : 0;
-    div.innerHTML = NORDHEM.Illustrations.svgFor(product, view);
+    const img = document.createElement('img');
+    img.src = product.photo || '';
+    img.alt = product.name;
+    img.className = 'tile__img';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    /* Fallback to gradient if photo fails to load */
+    img.onerror = () => {
+      const [a, b] = product.tileColors || ['#e8edf3', '#cfd8e3'];
+      div.style.background = `linear-gradient(135deg, ${a}, ${b})`;
+      img.remove();
+    };
+    div.appendChild(img);
     return div;
   }
 

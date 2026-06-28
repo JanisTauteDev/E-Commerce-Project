@@ -233,21 +233,15 @@ a.tier-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); te
 .tile {
   width: 100%; height: 100%;
   position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,.55), transparent 60%),
-              linear-gradient(135deg, var(--tile-a, #e8edf3), var(--tile-b, #cfd8e3));
+  background: var(--c-bg-alt);
 }
-.tile svg {
-  width: 80%; height: 80%;
+.tile__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform .35s ease;
 }
-.product-card:hover .tile svg { transform: scale(1.05); }
-.tile__label {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 600; color: rgba(0,0,0,.5);
-  text-align: center; padding: var(--s-3);
-}
+.product-card:hover .tile__img { transform: scale(1.05); }
 
 /* 9. Shop layout (sidebar + grid) */
 .shop {
@@ -292,12 +286,7 @@ a.tier-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); te
   aspect-ratio: 1/1; border: 1px solid var(--c-line); border-radius: var(--r-3); overflow: hidden;
   background: var(--c-bg-alt);
 }
-.gallery__thumbs { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
-.gallery__thumb {
-  width: 64px; height: 64px; border: 1px solid var(--c-line); border-radius: var(--r-2);
-  overflow: hidden; cursor: pointer; background: var(--c-bg-alt); padding: 0;
-}
-.gallery__thumb[aria-current="true"] { outline: 2px solid var(--c-primary); }
+
 
 .tier-selector { display: grid; gap: var(--s-3); margin: var(--s-4) 0; }
 .tier-option {
