@@ -354,7 +354,36 @@ a.tier-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); te
 .field__error { color: var(--c-danger); font-size: 0.85rem; min-height: 1em; }
 .field__row { display: grid; gap: var(--s-3); grid-template-columns: 1fr 1fr; }
 
-/*  13. Footer */
+/* 13. FAQ accordion */
+.faq { display: flex; flex-direction: column; gap: var(--s-3); margin-top: var(--s-4); }
+.faq details {
+  border: 1px solid var(--c-line); border-radius: var(--r-3); overflow: hidden;
+  transition: border-color .15s ease;
+}
+.faq details[open] { border-color: var(--c-primary); }
+.faq summary {
+  list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  font-weight: 600; cursor: pointer; user-select: none;
+  background: var(--c-bg);
+  transition: background .15s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { background: var(--c-bg-alt); }
+.faq summary::after {
+  content: "+"; font-size: 1.25rem; line-height: 1;
+  color: var(--c-primary); flex-shrink: 0;
+  transition: transform .2s ease;
+}
+.faq details[open] > summary::after { content: "\2212"; }
+.faq details > p {
+  margin: 0; padding: var(--s-4) var(--s-5);
+  color: var(--c-muted); line-height: 1.6;
+  border-top: 1px solid var(--c-line);
+}
+
+/*  14. Footer */
 .site-footer {
   margin-top: var(--s-8);
   background: #0F172A; color: #cbd5e1;
