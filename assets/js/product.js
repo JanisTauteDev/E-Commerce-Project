@@ -1,6 +1,6 @@
 /* Product detail page: gallery, tier selector, add to cart and related items */
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  NORDHEM.ready.then(() => {
     const { PRODUCTS, UI, Store, formatPrice, findCategory } = NORDHEM;
 
     const params = new URLSearchParams(location.search);

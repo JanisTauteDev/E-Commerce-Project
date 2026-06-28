@@ -1,6 +1,6 @@
 /* Homepage: hero tier showcase and featured products */
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  NORDHEM.ready.then(() => {
     const { PRODUCTS, UI, formatPrice } = NORDHEM;
 
     /* Hero: show the three tiers of one product */

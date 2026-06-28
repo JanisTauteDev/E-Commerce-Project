@@ -1,6 +1,6 @@
 /* Cart page */
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  NORDHEM.ready.then(() => {
     const { Store, UI, formatPrice } = NORDHEM;
 
     const list = document.querySelector("[data-cart-list]");

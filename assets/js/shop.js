@@ -1,6 +1,6 @@
 /* Shop page: filters, sort and search */
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  NORDHEM.ready.then(() => {
     const { PRODUCTS, CATEGORIES, TIERS, UI, minPrice } = NORDHEM;
 
     const params = new URLSearchParams(location.search);

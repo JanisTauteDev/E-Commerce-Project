@@ -1,6 +1,6 @@
 /* Checkout and contact form validation */
 (function () {
-  document.addEventListener("DOMContentLoaded", () => {
+  NORDHEM.ready.then(() => {
     const { Store, UI, formatPrice } = NORDHEM;
 
     /* Show the order summary on the checkout page */
