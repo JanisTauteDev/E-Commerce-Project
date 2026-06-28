@@ -50,7 +50,12 @@
         list.appendChild(row);
 
         info.querySelector("[data-inc]").addEventListener("click", () => {
-          Store.setQty(product.id, variant.tier, qty + 1);
+          const res = Store.setQty(product.id, variant.tier, qty + 1);
+          if (res.capped) {
+            UI.toast(
+              `Only ${res.stock} in stock for ${product.name} (${variant.tier}).`,
+            );
+          }
         });
         info.querySelector("[data-dec]").addEventListener("click", () => {
           if (qty <= 1) Store.remove(product.id, variant.tier);

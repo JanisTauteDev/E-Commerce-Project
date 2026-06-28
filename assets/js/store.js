@@ -21,6 +21,13 @@
     });
   }
 
+  /* Available stock for a variant; Infinity if the product data isn't loaded */
+  function stockOf(productId, tier) {
+    const product = NORDHEM.findProduct(productId);
+    const variant = product ? NORDHEM.findVariant(product, tier) : null;
+    return variant ? variant.stock : Infinity;
+  }
+
   const Store = {
     items: () => read(),
 
@@ -29,18 +36,30 @@
       const idx = items.findIndex(
         (i) => i.productId === productId && i.tier === tier,
       );
-      if (idx >= 0) items[idx].qty += qty;
-      else items.push({ productId, tier, qty });
-      write(items);
+      const current = idx >= 0 ? items[idx].qty : 0;
+      const stock = stockOf(productId, tier);
+      const desired = current + qty;
+      const next = Math.min(desired, stock);
+      const capped = next < desired;
+      if (next > current) {
+        if (idx >= 0) items[idx].qty = next;
+        else items.push({ productId, tier, qty: next });
+        write(items);
+      }
+      return { ok: !capped, added: next - current, qty: next, stock, capped };
     },
 
     setQty(productId, tier, qty) {
+      const stock = stockOf(productId, tier);
+      const clamped = Math.max(1, Math.min(qty, stock));
+      const capped = clamped < qty;
       const items = read().map((i) =>
         i.productId === productId && i.tier === tier
-          ? { ...i, qty: Math.max(1, qty) }
+          ? { ...i, qty: clamped }
           : i,
       );
       write(items);
+      return { ok: !capped, qty: clamped, stock, capped };
     },
 
     remove(productId, tier) {

@@ -117,8 +117,14 @@
         root.querySelector("[data-qty]").textContent = qty;
       });
       root.querySelector("[data-add]").addEventListener("click", () => {
-        Store.add(product.id, currentTier, qty);
-        UI.toast(`${product.name} (${currentTier}) × ${qty} added to cart`);
+        const res = Store.add(product.id, currentTier, qty);
+        if (res.capped) {
+          UI.toast(
+            `Only ${res.stock} in stock for ${product.name} (${currentTier}) — your cart now holds the maximum.`,
+          );
+        } else {
+          UI.toast(`${product.name} (${currentTier}) × ${res.added} added to cart`);
+        }
       });
 
       /* related products from the same category */
