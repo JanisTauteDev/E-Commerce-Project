@@ -27,12 +27,6 @@ python -m http.server 5500
 
 You can also double-click `index.html` and it will run.
 
-## Loading the SQL schema
-
-```powershell
-sqlite3 nordhem.db ".read database/schema.sql"
-```
-
 ## How the project meets the assessment
 
 - **Main Topic – price differentiation**: every product has Basic, Standard, and Premium tiers, shown on the cards, product page, shop filter, cart, and checkout.
