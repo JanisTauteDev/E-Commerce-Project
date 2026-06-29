@@ -137,7 +137,7 @@
 
       /* product image */
       const main = root.querySelector("[data-gallery-main]");
-      main.appendChild(UI.tile(product));
+      main.appendChild(UI.tile(product, true));
 
       /* tier choice */
       const tierBox = root.querySelector("[data-tiers]");
