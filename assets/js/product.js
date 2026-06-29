@@ -37,7 +37,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="index.html">Home</a><span>/</span>
           <a href="shop.html?category=${cat.id}">${cat.name}</a><span>/</span>
-          <span>${product.name}</span>
+          <span aria-current="page">${product.name}</span>
         </nav>
 
         <div class="product-detail">

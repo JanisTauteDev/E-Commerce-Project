@@ -300,6 +300,7 @@ a.tier-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); te
 }
 .breadcrumbs a { color: var(--c-muted); }
 .breadcrumbs span { margin: 0 var(--s-2); }
+.breadcrumbs span[aria-current="page"] { margin-left: 0; }
 
 .product-detail {
   display: grid; gap: var(--s-6);
