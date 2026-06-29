@@ -8,6 +8,7 @@ The project is implemented as a **dynamic website with a database**: HTML and CS
 
 - HTML, CSS, Vanilla JavaScript
 - SQL schema (SQLite-friendly DDL, easily portable to MySQL/PostgreSQL)
+- Prettier extension to format code for better readability
 - `localStorage` for cart persistence in the static demo
 
 ## Running the site
@@ -29,7 +30,7 @@ You can also double-click `index.html` and it will run.
 
 ## How the project meets the assessment
 
-- **Main Topic – price differentiation**: every product has Basic, Standard, and Premium tiers, shown on the cards, product page, shop filter, cart, and checkout.
+- **Main Topic - price differentiation**: every product has Basic, Standard, and Premium tiers, shown on the cards, product page, shop filter, cart, and checkout.
 - **Content and structure**: 7 linked pages (home, shop, product, cart, checkout, about, contact) with a shared header and footer.
 - **Design and usability**: clean, consistent styling, simple navigation, search, filters, and sorting.
 - **Responsive**: works on phones and desktops, with a hamburger menu and flexible product grid.

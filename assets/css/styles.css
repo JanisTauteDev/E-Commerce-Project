@@ -327,6 +327,32 @@ a.tier-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); te
 .specs dt { color: var(--c-muted); font-weight: 500; }
 .specs dd { margin: 0; }
 
+/* Specifications table */
+.spec-table-wrap { overflow-x: auto; border: 1px solid var(--c-line); border-radius: var(--r-3); }
+.spec-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.9rem; min-width: 460px;
+}
+.spec-table caption {
+  text-align: left; padding: var(--s-3) var(--s-4);
+  color: var(--c-muted); font-size: 0.8rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .04em;
+  border-bottom: 1px solid var(--c-line);
+}
+.spec-table th,
+.spec-table td {
+  padding: var(--s-3) var(--s-4); text-align: left;
+  border-bottom: 1px solid var(--c-line); vertical-align: top;
+}
+.spec-table thead th { background: var(--c-bg-alt); }
+.spec-table tbody th[scope="row"] { color: var(--c-muted); font-weight: 500; white-space: nowrap; }
+.spec-table tbody tr:last-child th,
+.spec-table tbody tr:last-child td { border-bottom: 0; }
+.spec-table .is-current { background: #f3f8fd; }
+.spec-table thead .is-current { background: #e8f1fb; }
+.spec-table__features { margin: 0; padding-left: 1.1rem; color: var(--c-muted); }
+.spec-table__features li { margin-bottom: 2px; }
+
 /* 11. Cart */
 .cart-line {
   display: grid; gap: var(--s-4);

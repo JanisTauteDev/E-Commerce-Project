@@ -62,12 +62,69 @@
 
             <div class="specs">
               <h3>Specifications</h3>
-              <dl>
-                <dt>SKU</dt><dd>${variant.sku}</dd>
-                <dt>Material</dt><dd>${product.material || "-"}</dd>
-                <dt>Dimensions</dt><dd>${product.dimensions || "-"}</dd>
-                <dt>Features</dt><dd>${variant.features.join(", ")}</dd>
-              </dl>
+              <div class="spec-table-wrap">
+                <table class="spec-table">
+                  <caption>
+                    ${product.name} - specifications by tier
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Specification</th>
+                      ${product.variants
+                        .map(
+                          (v) => `
+                      <th scope="col" class="${v.tier === currentTier ? "is-current" : ""}">
+                        <span class="tier tier--${v.tier}">${v.tier}</span>
+                      </th>`,
+                        )
+                        .join("")}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Price</th>
+                      ${product.variants
+                        .map(
+                          (v) => `
+                      <td class="${v.tier === currentTier ? "is-current" : ""}">
+                        <strong>${formatPrice(v.price)}</strong>
+                      </td>`,
+                        )
+                        .join("")}
+                    </tr>
+                    <tr>
+                      <th scope="row">SKU</th>
+                      ${product.variants
+                        .map(
+                          (v) => `
+                      <td class="${v.tier === currentTier ? "is-current" : ""}">${v.sku}</td>`,
+                        )
+                        .join("")}
+                    </tr>
+                    <tr>
+                      <th scope="row">Material</th>
+                      <td colspan="${product.variants.length}">${product.material || "-"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Dimensions</th>
+                      <td colspan="${product.variants.length}">${product.dimensions || "-"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Features</th>
+                      ${product.variants
+                        .map(
+                          (v) => `
+                      <td class="${v.tier === currentTier ? "is-current" : ""}">
+                        <ul class="spec-table__features">
+                          ${v.features.map((f) => `<li>${f}</li>`).join("")}
+                        </ul>
+                      </td>`,
+                        )
+                        .join("")}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
         </div>
