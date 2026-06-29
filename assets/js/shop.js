@@ -15,7 +15,7 @@
 
     const sorters = {
       popular: (a, b) => b.reviewCount - a.reviewCount,
-      rating: (a, b) => b.rating - a.rating,
+      rating: (a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount,
       priceAsc: (a, b) => minPrice(a) - minPrice(b),
       priceDesc: (a, b) => minPrice(b) - minPrice(a),
       name: (a, b) => a.name.localeCompare(b.name),
