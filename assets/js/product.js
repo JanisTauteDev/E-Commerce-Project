@@ -12,6 +12,16 @@
       return;
     }
 
+    /* Preload the hero image as early as possible (above-the-fold LCP) */
+    if (product.photo) {
+      const pre = document.createElement("link");
+      pre.rel = "preload";
+      pre.as = "image";
+      pre.href = product.photo;
+      pre.setAttribute("fetchpriority", "high");
+      document.head.appendChild(pre);
+    }
+
     let currentTier =
       params.get("tier") &&
       product.variants.some((v) => v.tier === params.get("tier"))

@@ -62,6 +62,8 @@
     img.src      = product.photo || '';
     img.alt      = product.name;
     img.className = 'tile__img';
+    img.width    = 600;
+    img.height   = 600;
     img.loading  = eager ? 'eager' : 'lazy';
     img.decoding = eager ? 'sync'  : 'async';
     if (eager) img.setAttribute('fetchpriority', 'high');

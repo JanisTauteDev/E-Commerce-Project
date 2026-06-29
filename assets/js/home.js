@@ -27,6 +27,17 @@
     const featuredGrid = document.querySelector("[data-featured]");
     if (featuredGrid) {
       const top = [...PRODUCTS].sort((a, b) => b.rating - a.rating).slice(0, 8);
+
+      /* Preload the first featured image (above-the-fold LCP) */
+      if (top[0] && top[0].photo) {
+        const pre = document.createElement("link");
+        pre.rel = "preload";
+        pre.as = "image";
+        pre.href = top[0].photo;
+        pre.setAttribute("fetchpriority", "high");
+        document.head.appendChild(pre);
+      }
+
       UI.renderProductGrid(featuredGrid, top);
     }
 
