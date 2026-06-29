@@ -73,7 +73,7 @@
                       ${product.variants
                         .map(
                           (v) => `
-                      <th scope="col" class="${v.tier === currentTier ? "is-current" : ""}">
+                      <th scope="col">
                         <span class="tier tier--${v.tier}">${v.tier}</span>
                       </th>`,
                         )
@@ -86,7 +86,7 @@
                       ${product.variants
                         .map(
                           (v) => `
-                      <td class="${v.tier === currentTier ? "is-current" : ""}">
+                      <td>
                         <strong>${formatPrice(v.price)}</strong>
                       </td>`,
                         )
@@ -97,7 +97,7 @@
                       ${product.variants
                         .map(
                           (v) => `
-                      <td class="${v.tier === currentTier ? "is-current" : ""}">${v.sku}</td>`,
+                      <td>${v.sku}</td>`,
                         )
                         .join("")}
                     </tr>
@@ -114,7 +114,7 @@
                       ${product.variants
                         .map(
                           (v) => `
-                      <td class="${v.tier === currentTier ? "is-current" : ""}">
+                      <td>
                         <ul class="spec-table__features">
                           ${v.features.map((f) => `<li>${f}</li>`).join("")}
                         </ul>
