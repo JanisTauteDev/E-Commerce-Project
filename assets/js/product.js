@@ -190,7 +190,9 @@
             `Only ${res.stock} in stock for ${product.name} (${currentTier}) - your cart now holds the maximum.`,
           );
         } else {
-          UI.toast(`${product.name} (${currentTier}) × ${res.added} added to cart`);
+          UI.toast(
+            `${product.name} (${currentTier}) × ${res.added} added to cart`,
+          );
         }
       });
 

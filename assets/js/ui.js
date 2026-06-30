@@ -55,22 +55,22 @@
    * eager=false → native lazy-load (default for off-screen cards)
    */
   function tile(product, eager) {
-    const div = document.createElement('div');
-    div.className = 'tile';
+    const div = document.createElement("div");
+    div.className = "tile";
 
-    const img = document.createElement('img');
-    img.src      = product.photo || '';
-    img.alt      = product.name;
-    img.className = 'tile__img';
-    img.width    = 600;
-    img.height   = 600;
-    img.loading  = eager ? 'eager' : 'lazy';
-    img.decoding = eager ? 'sync'  : 'async';
-    if (eager) img.setAttribute('fetchpriority', 'high');
+    const img = document.createElement("img");
+    img.src = product.photo || "";
+    img.alt = product.name;
+    img.className = "tile__img";
+    img.width = 600;
+    img.height = 600;
+    img.loading = eager ? "eager" : "lazy";
+    img.decoding = eager ? "sync" : "async";
+    if (eager) img.setAttribute("fetchpriority", "high");
 
     /* Fallback to gradient if photo fails to load */
     img.onerror = () => {
-      const [a, b] = product.tileColors || ['#e8edf3', '#cfd8e3'];
+      const [a, b] = product.tileColors || ["#e8edf3", "#cfd8e3"];
       div.style.background = `linear-gradient(135deg, ${a}, ${b})`;
       img.remove();
     };
@@ -119,7 +119,9 @@
     body.querySelector("[data-quick-add]").addEventListener("click", () => {
       const res = Store.add(product.id, "standard", 1);
       if (res.capped) {
-        toast(`Only ${res.stock} in stock for ${product.name} (Standard) - maximum reached.`);
+        toast(
+          `Only ${res.stock} in stock for ${product.name} (Standard) - maximum reached.`,
+        );
       } else {
         toast(`${product.name} (Standard) added to cart`);
       }
