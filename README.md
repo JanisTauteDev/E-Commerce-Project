@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img src="assets/images/furniture-store.png" alt="NORDHEM icon" width="80" />
 </p>
 
