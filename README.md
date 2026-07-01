@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/images/furniture-store.png" alt="NORDHEM icon" width="80" />
+</p>
+
 # NORDHEM - IKEA-style Home & Room Essentials
 
 A small e-commerce store for selling home & room essentials, built as a course project. The chosen course topic is **price differentiation**: every product comes in three tiers - **Basic**, **Standard**, **Premium** - surfaced consistently across the homepage, catalog, product page, cart, and checkout.
@@ -30,18 +34,47 @@ You can also double-click `index.html` and it will run.
 
 ## How the project meets the assessment
 
-- **Main Topic - price differentiation**: every product has Basic, Standard, and Premium tiers, shown on the cards, product page, shop filter, cart, and checkout.
-- **Content and structure**: 7 linked pages (home, shop, product, cart, checkout, about, contact) with a shared header and footer.
-- **Design and usability**: clean, consistent styling, simple navigation, search, filters, and sorting.
-- **Responsive**: works on phones and desktops, with a hamburger menu and flexible product grid.
-- **Dynamic (JavaScript)**: catalog, cart, and checkout are built from data; forms are validated; the cart is saved in `localStorage`.
-- **Database**: a MySQL-compatible SQL schema (`database/schema.sql`) for categories, products, and tiers, with relationships and seed data.
+### Pages
+
+The site has 7 linked pages — home, shop, product, cart, checkout, about, and contact — all sharing a common header and footer. This exceeds the minimum of 5 pages required by the assignment.
+
+### Images
+
+Every product card and product detail page displays a product image. The homepage hero and category section also use images. Product images are loaded dynamically from the data layer.
+
+### Video
+
+The homepage includes an embedded YouTube video (`<iframe>`) in a dedicated "Our story" section, showcasing the brand and product style.
+
+### Hyperlinks
+
+Navigation links connect all pages via the header and footer. Additional in-page links include category shortcuts in the footer, a "Continue shopping" link from cart/checkout, and anchor links..
+
+### Lists
+
+Unordered lists (`<ul>/<li>`) are used for the feature bullets on the homepage hero, and are rendered dynamically on the product page to display per-tier feature lists inside the specification table.
+
+### Tables
+
+The product page renders a `<table>` dynamically via JavaScript that compares the three pricing tiers (Basic, Standard, Premium) side by side, showing price, features, and an "Add to cart" button for each tier.
+
+### Design and usability
+
+Clean, consistent styling with a shared CSS file, simple navigation, product search, category and tier filters, and sort controls on the shop page. The layout is responsive for both mobile and desktop.
+
+### Dynamic behaviour (JavaScript)
+
+The product catalog, product page, cart, and checkout are all built from a shared data layer. The cart persists across page reloads using `localStorage`. Checkout and contact forms are validated before submission.
+
+### Database
+
+A MySQL-compatible SQL schema (`database/schema.sql`) defines the full data model: categories, products, pricing tiers, and stock levels, with foreign keys and seed data matching the live site.
 
 ## Topic Integration
 
 The store includes the following topics from the project list:
 
-- **Price Differentiation**: every product comes in three pricing tiers (Basic, Standard, Premium), each with its own price and feature set, shown across the cards, product page, shop filter, cart, and checkout.
+- **Main Topic: Price Differentiation**: every product comes in three pricing tiers (Basic, Standard, Premium), each with its own price and feature set, shown across the cards, product page, shop filter, cart, and checkout.
 - **Recommendation Systems**: the product page shows a "You may also like" row that suggests related products from the same category.
 - **Digital Nudging**: the Standard tier is pre-selected as the default option, and each product shows its stock level ("In stock (n)" or "Out of stock") to create a sense of scarcity. Ratings and review counts act as social proof.
 
